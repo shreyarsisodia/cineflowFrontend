@@ -108,9 +108,9 @@ const SubscriptionCard = ({ plan }: { plan: Plan }) => {
       </p>
       <button
        onClick={() => {handleCheckout(plan.planName, plan.price)}}
-        style={buttonStyle}
-        onMouseEnter={(e) => (e.currentTarget.style.background = "#b20710")}
-        onMouseLeave={(e) => (e.currentTarget.style.background = "#e50914")}
+       className="moreInfoBtn"
+        onMouseEnter={(e) => (e.currentTarget.style.background = "#d3d3d3")}
+        onMouseLeave={(e) => (e.currentTarget.style.background = "#d3d3d3")}
       >
         Subscribe
       </button>

@@ -2,11 +2,12 @@
 import React from "react";
 import Slider from "react-slick";
 import Card from "./Card";
+import { motion } from "framer-motion"; // Import Framer Motion
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import VideoModal from "./videoModal";
 export interface Video {
-  poster: string;
+  posterUrl: string;
   title: string;
   url: string;
   aiDescription: string;
@@ -17,66 +18,44 @@ interface CardSliderProps {
 }
 
 function CardSlider({ allVideos }: CardSliderProps) {
-  // const dispatch = useDispatch<AppDispatch>();
-  //   const {movies} = useSelector((state:any)=>state?.movie)
-  console.log(allVideos, "movies");
-  //  useEffect(()=>{
-  //   dispatch(fetchVideos())
-  //  },[])
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
-    // nextArrow: <div className="slick-next"> ▶</div>,
-    // prevArrow: <div className="slick-prev"> ◀</div>,
   };
+
   return (
     <>
-    <VideoModal/>
+      <VideoModal />
       <div className="slider-container">
         <Slider {...settings}>
           {allVideos?.map((ele: Video, index: number) => (
-            <Card
-              imageUrl={ele?.poster}
-              title={ele?.title}
-              videoUrl={ele?.url}
+            <motion.div
               key={index}
-              ele={ele}
-            />
+              initial={{ opacity: 0, y: 30, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 0.5,
+                ease: "easeOut",
+                delay: index * 0.1, // Staggered effect
+              }}
+              whileHover={{
+                scale: 1.1,
+                rotateY: 10,
+                boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.3)",
+              }} // 3D pop effect
+              whileTap={{ scale: 0.95 }} // Press animation
+            >
+              <Card
+                imageUrl={"https://www.youloveit.com/uploads/posts/2023-10/1698165653_youloveit_com_disney_wish_new_poster.jpg"}
+                title={ele?.title}
+                videoUrl={ele?.url}
+                ele={ele}
+              />
+            </motion.div>
           ))}
-
-          {/* <Card
-        imageUrl="https://via.placeholder.com/300x200"
-        title="Beautiful Landscape"
-        description="A beautiful view of the mountains during sunset."
-      />
-       <Card
-        imageUrl="https://via.placeholder.com/300x200"
-        title="Beautiful Landscape"
-        description="A beautiful view of the mountains during sunset."
-      />
-       <Card
-        imageUrl="https://via.placeholder.com/300x200"
-        title="Beautiful Landscape"
-        description="A beautiful view of the mountains during sunset."
-      />
-       <Card
-        imageUrl="https://via.placeholder.com/300x200"
-        title="Beautiful Landscape"
-        description="A beautiful view of the mountains during sunset."
-      />
-       <Card
-        imageUrl="https://via.placeholder.com/300x200"
-        title="Beautiful Landscape"
-        description="A beautiful view of the mountains during sunset."
-      />
-       <Card
-        imageUrl="https://via.placeholder.com/300x200"
-        title="Beautiful Landscape"
-        description="A beautiful view of the mountains during sunset."
-      /> */}
         </Slider>
       </div>
     </>

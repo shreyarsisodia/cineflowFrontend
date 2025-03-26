@@ -1,13 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, CSSProperties, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import ReactModal from "react-modal";
 import { AppDispatch } from "../redux/store";
-import {
-  addCommentToVideo,
+import { addCommentToVideo,
   addLikeToVideo,
   getCommentVideo,
-  setShowDialog,
+    setShowDialog,
   setStoreMovie,
   updateUserWatchHistory,
 } from "../redux/slices/movieSlice";
@@ -17,6 +16,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { useRouter } from "next/navigation";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
@@ -26,25 +27,20 @@ import { Avatar, TextField, Tooltip } from "@mui/material";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { RootState } from '../redux/store';
 // ReactModal.setAppElement('#__next');
-
 interface ClickCard {
   _id: string;
 }
-
-
 const VideoModal = () => {
-  // const comments = 3;
-  // const override: CSSProperties = {
-  //   display: "block",
-  //   margin: "0 auto",
-  //   borderColor: "red",
-  // };
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const [items, setItems] = useState<ClickCard[]>([]);
   const [showCommentBox, setShowCommentBox] = useState<boolean>(false);
-  const [inputComment, setInputComment] = useState<string>("");
-  // const playerRef = useRef<any>(null);
+  const [inputComment, setInputComment] = useState<string>("");  // const playerRef = useRef<any>(null);
   const {
     showDialog,
     clickedCard,
@@ -52,10 +48,8 @@ const VideoModal = () => {
     videoComments,
     likeResponse,
   } = useSelector((state:RootState) => state.movie);
-  
-  
-  console.log(inputComment, "inputComment");
-  console.log(clickedCard, "clickedCard");
+  // console.log(showDialog, "showDialog");
+  // console.log(clickedCard, "clickedCard");
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -85,7 +79,7 @@ const VideoModal = () => {
     //   playerRef.current.stop(); // Stop the video
     // }
   };
-  const handleWatchList = (clickedCard:ClickCard) => {
+  const handleWatchList = (clickedCard: ClickCard) => {
     const isExist = items?.some((ele) => ele?._id == clickedCard?._id);
     if (!isExist) {
       const newArr = [...items, clickedCard];
@@ -96,7 +90,6 @@ const VideoModal = () => {
 
     dispatch(setShowDialog(false));
   };
-
   const handleComment = async () => {
     const commentData = {
       videoId: clickedCard?._id,
@@ -123,7 +116,7 @@ const VideoModal = () => {
         overlayClassName="modal-overlay"
       >
         {/* <button onClick={handleModal} className="close-button">close</button> */}
-        {showDialog ? (
+        { showDialog ? (
           // <div className="video-container">
           //   <ReactPlayer
           //     ref={playerRef}
@@ -134,66 +127,77 @@ const VideoModal = () => {
           //   />
           // </div>
           <div>
-            <Card>
+            <Card sx={{ position: "relative",borderRadius: "10px",height: 550,  backgroundPosition: "top",
+               paddingBottom: "8px !important"  }}>
               <CardMedia
-                sx={{ height: 250 }}
-                image={clickedCard?.poster}
+                 sx={{ 
+                  height: 550, 
+                  objectFit: "cover",
+                  backgroundPosition: "top" // Ensure cropping happens from the bottom
+                }}
+                image={"https://i.pinimg.com/736x/78/7f/94/787f948d9ab39ad51d88074ac7f82685.jpg"}
                 title="movie"
-                className="show-image"
+                // className="show-image"
               />
-              <CardContent className="show-content">
+              <CardContent sx={{
+      position: "absolute", /* Overlay on top of the image */
+      bottom: 0, /* Align at the bottom of the card */
+      left: 0,
+      right: 0,
+      // padding: "16px",
+      backdropFilter: "blur(5px)", /* Apply frosted glass effect */
+      background: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%)", /* Gradient fade from transparent to semi-transparent black */
+      zIndex: 1, /* Ensure it appears above the image */
+    }} className="show-content">
                 <div className="show-title">{clickedCard?.title}</div>
                 <div className="show-des">
-                  {showDes ||
-                    clickedCard?.aiDescription ||
-                    "Generating Descripation using AI...."}
+                <div className="show-des">
+  {showDes ||
+    (clickedCard?.aiDescription?.length > 200
+      ? `${clickedCard?.aiDescription.substring(0, 200)}...`
+      : clickedCard?.aiDescription) ||
+    "Generating Description using AI..."}
+</div>
                 </div>
-              </CardContent>
-              <div className="show-data">
+                <div className="show-data">
                 <div className="show-actions">
-                  <Tooltip title="Play Video">
-                    <PlayCircleOutlineIcon
-                      sx={{
-                        color: "white",
-                        height: "35px",
-                        width: "35px",
-                        zIndex: 999,
-                      }}
-                      onClick={handleModal}
-                    />
-                  </Tooltip>
-                  <Tooltip title="Add to Watchlist">
-                    <AddCircleOutlineIcon
-                      sx={{ color: "white", height: "35px", width: "35px" }}
-                      onClick={() => {
-                        handleWatchList(clickedCard);
-                      }}
-                    />
-                  </Tooltip>
+                  <PlayCircleOutlineIcon
+                    sx={{
+                      color: "white",
+                      height: "30px",
+                      width: "30px",
+                      zIndex: 999,
+                    }}
+                    onClick={handleModal}
+                  />
+                  <AddCircleOutlineIcon
+                    sx={{ color: "white", height: "30px", width: "30px" }}
+                    onClick={() => {
+                      handleWatchList(clickedCard);
+                    }}
+                  />
+                
                   {likeResponse?.likes == 0 ? (
                     <Tooltip title="Like">
-                      <ThumbUpOffAltIcon
-                        sx={{ color: "white", height: "35px", width: "35px" }}
-                        onClick={handleLike}
-                      />
+                        <FavoriteBorderIcon
+                    sx={{ color: "white", height: "30px", width: "30px" }}
+                    onClick={handleLike}
+                  />
                     </Tooltip>
                   ) : (
                     <Tooltip title="Dislike">
-                      <ThumbUpIcon
-                        sx={{ color: "red", height: "35px", width: "35px" }}
-                        onClick={handleLike}
-                      />
+                       <FavoriteIcon
+                    sx={{ color: "grey", height: "30px", width: "30px" }}
+                    onClick={handleLike}
+                  />
                     </Tooltip>
-                  )}
-                  <Tooltip title="Add Comment" sx={{ color: "white" }}>
-                    <CommentIcon
-                      sx={{ color: "white", height: "35px", width: "35px" }}
-                      onClick={() => {
-                        dispatch(getCommentVideo(clickedCard?._id));
-                        setShowCommentBox(true);
-                      }}
-                    />
-                  </Tooltip>
+                  )}                  <CommentIcon
+                    sx={{ color: "white", height: "30px", width: "30px" }}
+                    onClick={() => {
+                      dispatch(getCommentVideo(clickedCard?._id));
+                      setShowCommentBox(true);
+                    }}
+                  />
                 </div>
                 <div className="show-info">
                   <FiberManualRecordIcon
@@ -238,6 +242,7 @@ const VideoModal = () => {
                   </div>
                 </div>
               </div>
+              </CardContent>
               {showCommentBox ? (
                 <div className="comment-section">
                   <div className="comment-title">{`Total Comments: ${videoComments?.result?.length}`}</div>
@@ -264,8 +269,7 @@ const VideoModal = () => {
                         Submit
                       </button>
                     </div>
-                  </div>
-                  {videoComments && videoComments.result && videoComments.result.length > 0 && (
+                    {videoComments && videoComments.result && videoComments.result.length > 0 && (
                     <div className="comment-parent">
                       {videoComments?.result &&
                         videoComments?.result?.map(
@@ -293,10 +297,12 @@ const VideoModal = () => {
                         )}
                     </div>
                   )}
+                  </div>
+                 
                 </div>
               ) : (
                 <></>
-              )}
+              )}           
             </Card>
           </div>
         ) : (

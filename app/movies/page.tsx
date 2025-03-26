@@ -11,15 +11,35 @@ import { HeroData } from '../dashboard/page';
 const Movies = () => {
   const dispatch: AppDispatch = useDispatch();
   const {movies} = useSelector((state:RootState)=>state.movie)
-  const featuredMovie:HeroData = {
-    urlName:"jurasic-world",
-    title: "Jurasic World",
-    image: "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/poster/jurassic-world.jpg",
-    videoUrl:"https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/Jurassic+World.mp4",
-    description: "Where Dinosaurs Roam, Adventure Awaits at Every Turn",
-     genre:"Thiller",
-    type:"movie"
-  };
+  const featuredMovie :HeroData[] = [
+    {
+      urlName: "Frozen",
+      title: "Frozen",
+      type: "movie",
+      genre: "Animation, Adventure, Fantasy",
+      image: "https://images7.alphacoders.com/112/1120950.jpg",
+      videoUrl: "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/Frozen-Movie-Trailer.mp4",
+      description: "A princess discovers her icy powers."
+    },
+    {
+      urlName: "Raya",
+      title: "Raya and the Last Dragon",
+      type: "movie",
+      genre: "Animation, Action, Adventure",
+      image: "https://wallpapers.com/images/hd/raya-and-the-last-dragon-heroes-forest-poster-seresvygoxxw0en0.jpg",
+      videoUrl: "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/Raya-Movie-Trailer.mp4",
+      description: "A warrior seeks the last dragon."
+    },
+    {
+      urlName: "BeautyBeast",
+      title: "Beauty and the Beast",
+      type: "movie",
+      genre: "Animation, Romance, Fantasy",
+      image: "https://images6.alphacoders.com/811/811443.jpg",
+      videoUrl: "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/Beauty-and-the-Beast-Trailer.mp4",
+      description: "A tale as old as time."
+    }
+  ];
 
     useEffect(() => {
       dispatch(fetachMovies("movie"));

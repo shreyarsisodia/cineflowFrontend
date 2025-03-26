@@ -252,7 +252,8 @@ export default function ProfilePage() {
           </Box>
 
           {/* ✅ Save Button */}
-          <Button variant="contained" color="error" sx={{ mt: 4 }}>
+          
+          <Button variant="outlined" color="error" sx={{ color: "white", borderColor: "white",mt: 4 }}>
             Save Changes
           </Button>
           <Button

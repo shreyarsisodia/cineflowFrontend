@@ -65,7 +65,7 @@ export default function Navbar() {
     >
       <div className="logo">
         <Link href="/dashboard" className="logo-text">
-          Cineflow
+          CineStream
         </Link>
       </div>
       <nav className="nav-menu">

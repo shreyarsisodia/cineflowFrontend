@@ -26,6 +26,7 @@ export default function Home() {
   } = useForm<LoginForm>({
     mode: "onBlur"
   });
+  
 
   // const handleLogin = async (data: LoginForm) => {
   //   setError(null);
@@ -55,7 +56,7 @@ export default function Home() {
    const res = await  dispatch(userLogin({ email: data.email, password: data.password }))
   //  console.log(res)
    if(res?.payload?.status == 200){
-    router.push("/dashboard")
+    router.push("/success?type=login");
    }
   }
   return (
@@ -63,8 +64,8 @@ export default function Home() {
       <div className="absolute inset-0 bg-[url('/netflix-bg.jpg')] bg-cover bg-center opacity-50 w-[100vw] h-[100vh]"></div>
       <div className="absolute inset-0 bg-overlay"></div>
       <div className="auth-box z-2">
-        <h1 className="text-4xl font-bold text-center text-[var(--foreground)] heading">
-          CineFlow
+        <h1 className="logo-text text-4xl">
+          CineStream
         </h1>
         {error && (
           <p className="text-red-500 text-sm text-center mt-2">{error}</p>
@@ -108,7 +109,7 @@ export default function Home() {
           <div className="w-full">
           <button
             type="submit"
-            className="bg-[var(--foreground)] text-white-800 font-semibold py-3 mt-3 w-full"
+            className=" moreInfoBtn  text-white-800 font-semibold py-3 mt-3 w-full border-radius-none"
             disabled={!isValid}
           >
             Sign In

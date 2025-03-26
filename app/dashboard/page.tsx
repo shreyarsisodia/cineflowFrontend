@@ -50,18 +50,35 @@ export default function Dashboard() {
     dispatch(getAiRecommendationList());
   }, []);
 
-  const featuredMovie :HeroData = {
-    urlName: "Avatar",
-    title: "Avatar: The Way of Water",
-    type: "movie",
-    genre: "Adventure",
-    image:
-      "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/poster/Avatar-The+way+of+water.jpg",
-    videoUrl:
-      "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/The+Beauty+Of+Avatar+-+The+Way+Of+Water.mp4",
-    description:
-      "The sea is your home, before your birth and after your death.",
-  };
+  const featuredMovie :HeroData[] = [
+    {
+      urlName: "Frozen",
+      title: "Frozen",
+      type: "movie",
+      genre: "Animation, Adventure, Fantasy",
+      image: "https://images7.alphacoders.com/112/1120950.jpg",
+      videoUrl: "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/Frozen-Movie-Trailer.mp4",
+      description: "A princess discovers her icy powers."
+    },
+    {
+      urlName: "Raya",
+      title: "Raya and the Last Dragon",
+      type: "movie",
+      genre: "Animation, Action, Adventure",
+      image: "https://wallpapers.com/images/hd/raya-and-the-last-dragon-heroes-forest-poster-seresvygoxxw0en0.jpg",
+      videoUrl: "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/Raya-Movie-Trailer.mp4",
+      description: "A warrior seeks the last dragon."
+    },
+    {
+      urlName: "BeautyBeast",
+      title: "Beauty and the Beast",
+      type: "movie",
+      genre: "Animation, Romance, Fantasy",
+      image: "https://images6.alphacoders.com/811/811443.jpg",
+      videoUrl: "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/Beauty-and-the-Beast-Trailer.mp4",
+      description: "A tale as old as time."
+    }
+  ];
 
   const allMovies = allVideos?.filter((ele) => {
     return ele?.type == "movie";
@@ -80,34 +97,47 @@ export default function Dashboard() {
       <div className="bg-black text-white min-h-screen">
         {/* <Navbar /> */}
         <HeroSection data={featuredMovie} />
-        <div className="trending-head">Trending Now</div>
-        <CardSlider allVideos={allVideos} />
+  
+        {/* Trending Now */}
+        {allVideos?.length > 0 && (
+          <>
+            <div className="trending-head">Trending Now</div>
+            <CardSlider allVideos={allVideos} />
+          </>
+        )}
+  
+        {/* Continue Watching */}
         {userWatchHistory?.length > 3 && (
           <>
-            <div className="trending-head">continue watching...</div>
+            <div className="trending-head">Continue Watching...</div>
             <CardSlider allVideos={userWatchHistory} />
           </>
         )}
-        {aiRecommendationList && aiRecommendationList?.length > 0 && (
+  
+        {/* AI Recommendations */}
+        {aiRecommendationList?.length > 0 && (
           <>
-            <div className="trending-head">Ai Recommendation List </div>
+            <div className="trending-head">AI Recommendation List</div>
             <CardSlider allVideos={aiRecommendationList} />
           </>
         )}
-        {allMovies && (
+  
+        {/* Binge-Worthy Movies */}
+        {allMovies?.length > 0 && (
           <>
-            <div className="trending-head">Binge Worty movies</div>
+            <div className="trending-head">Binge-Worthy Movies</div>
             <CardSlider allVideos={allMovies} />
           </>
         )}
-
-        {allTvShows && (
+  
+        {/* Critically Acclaimed TV Shows */}
+        {allTvShows?.length > 0 && (
           <>
-            <div className="trending-head">Critically Acclaimed Tv Shows </div>
+            <div className="trending-head">Critically Acclaimed TV Shows</div>
             <CardSlider allVideos={allTvShows} />
           </>
         )}
       </div>
     </>
   );
-}
+}  
