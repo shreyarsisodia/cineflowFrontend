@@ -1,10 +1,10 @@
 "use client";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import {RotateWords} from "../../components/StartAnimation";
+import {RotateWords} from "@/components/ui/startAnimation";
 
-export default function SuccessPage() {
+function SuccessContent() {
   //Auto redirect after 3 seconds
 
   const searchParams = useSearchParams();
@@ -39,5 +39,13 @@ export default function SuccessPage() {
      
 
   </div>
+  );
+  
+}
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-black text-white">Loading...</div>}>
+      <SuccessContent />
+    </Suspense>
   );
 }
