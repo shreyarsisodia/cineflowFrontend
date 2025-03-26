@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import VideoModal from "./videoModal";
 export interface Video {
-  posterUrl: string;
+  poster: string;
   title: string;
   url: string;
   aiDescription: string;
@@ -48,8 +48,9 @@ function CardSlider({ allVideos }: CardSliderProps) {
               }} // 3D pop effect
               whileTap={{ scale: 0.95 }} // Press animation
             >
+              
               <Card
-                imageUrl={"https://www.youloveit.com/uploads/posts/2023-10/1698165653_youloveit_com_disney_wish_new_poster.jpg"}
+                imageUrl={ele?.poster}
                 title={ele?.title}
                 videoUrl={ele?.url}
                 ele={ele}

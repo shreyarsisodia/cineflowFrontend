@@ -48,7 +48,7 @@ const Card: React.FC<CardProps> = ({ imageUrl, title, videoUrl, ele }) => {
           {/* <h3 className="card-title">{title}</h3> */}
           <div className="card-image-container-overlay">
             <div className="base-text">UK,2001</div>
-            <div>Harry Potter and the </div>
+            <div>{title}</div>
             <div className="card-image-container-overlay-rating">
               <div className="imdb-rating">
                 <Image
