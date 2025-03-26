@@ -1,5 +1,5 @@
 "use client";
-import React, {  useState, CSSProperties, useEffect } from "react"
+import React, {  useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import ReactModal from "react-modal";
 import { AppDispatch } from "../redux/store";
