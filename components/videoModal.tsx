@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, CSSProperties, useEffect } from "react"
+import React, {  useState, CSSProperties, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import ReactModal from "react-modal";
 import { AppDispatch } from "../redux/store";
@@ -20,22 +20,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { useRouter } from "next/navigation";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import CommentIcon from "@mui/icons-material/Comment";
 import ClipLoader from "react-spinners/ClipLoader";
 import { Avatar, TextField, Tooltip } from "@mui/material";
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { RootState } from '../redux/store';
 // ReactModal.setAppElement('#__next');
 interface ClickCard {
   _id: string;
 }
 const VideoModal = () => {
-  const override: CSSProperties = {
-    display: "block",
-    margin: "0 auto",
-    borderColor: "red",
-  };
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const [items, setItems] = useState<ClickCard[]>([]);

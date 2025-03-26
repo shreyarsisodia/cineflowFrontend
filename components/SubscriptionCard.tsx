@@ -57,17 +57,7 @@ const cardStyle:CSSProperties = {
     "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease-in-out",
 };
 
-const buttonStyle = {
-  marginTop: "15px",
-  padding: "10px 15px",
-  border: "none",
-  background: "#e50914",
-  color: "white",
-  borderRadius: "5px",
-  cursor: "pointer",
-  fontSize: "1rem",
-  transition: "background 0.3s ease-in-out",
-};
+
 
 const SubscriptionCard = ({ plan }: { plan: Plan }) => {
   const handleCheckout = async (name:string, price:number) => {

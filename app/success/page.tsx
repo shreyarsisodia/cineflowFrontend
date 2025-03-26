@@ -2,9 +2,6 @@
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import {
-  Button,
-} from "@mui/material";
 import {RotateWords} from "../../components/StartAnimation";
 
 export default function SuccessPage() {

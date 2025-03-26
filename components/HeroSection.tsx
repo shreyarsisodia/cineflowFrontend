@@ -77,7 +77,7 @@ const HeroSection = ({ data=[] }: HeroSectionProps) => {
 
       {/* Image Slideshow */}
       <div className="imageContainer relative">
-        {data?.map((movie: any, index: number) => (
+        {data?.map((movie: HeroData, index: number) => (
           <Image
             key={index}
             src={movie?.image}
