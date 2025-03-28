@@ -52,7 +52,6 @@ export default function Home() {
  console.log(process.env.NEXT_PUBLIC_BASE_URL,"baseurl")
   const handleLogin = async (data:LoginForm)=>{
     setError(null)
-    console.log(data,"data")
    const res = await  dispatch(userLogin({ email: data.email, password: data.password }))
   //  console.log(res)
    if(res?.payload?.status == 200){
