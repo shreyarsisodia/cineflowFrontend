@@ -5,7 +5,7 @@ import { json } from "stream/consumers";
 interface Iprofile {
   name: string;
   email: string;
-  profileUrl: string;
+  avatar: string;
 }
 interface IUser {
   profile: Iprofile | null;

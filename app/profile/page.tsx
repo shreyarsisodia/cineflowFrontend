@@ -35,6 +35,7 @@ export default function ProfilePage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState("");
+  
   // const [selectedFile, setSelectedFile] = useState<any>();
   const [mywatchList, setMywatchList] = useState<WatchListItem[]>([]);
 
@@ -60,12 +61,9 @@ export default function ProfilePage() {
     );
 
     const data = await response.json();
-    if (data.profileAvatar) {
-      setAvatar(data.profileAvatar);
-    }
+      setAvatar(data?.profileAvatar);    
   };
 
-  console.log(avatar, "avatar");
 
   useEffect(() => {
     dispatch(fetchUserProfile("arg"));
@@ -78,7 +76,7 @@ export default function ProfilePage() {
     if (profile) {
       setName(profile?.name);
       setEmail(profile?.email);
-      setAvatar(profile?.profileUrl);
+      setAvatar(profile?.avatar);
     }
   }, [profile]);
 

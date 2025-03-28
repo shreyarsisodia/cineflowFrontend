@@ -46,6 +46,7 @@ const VideoModal = () => {
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    setShowCommentBox(false)
     const storedItems = localStorage.getItem("myLists");
     if (storedItems) {
       try {
@@ -67,6 +68,7 @@ const VideoModal = () => {
   };
   const closeModal = () => {
     dispatch(setShowDialog(false));
+    setShowCommentBox(false)
     // if (playerRef.current) {
     //   playerRef.current.seekTo(0); // Optionally reset the video to the beginning
     //   playerRef.current.stop(); // Stop the video
@@ -188,7 +190,7 @@ const VideoModal = () => {
                     sx={{ color: "white", height: "30px", width: "30px" }}
                     onClick={() => {
                       dispatch(getCommentVideo(clickedCard?._id));
-                      setShowCommentBox(true);
+                      setShowCommentBox(!showCommentBox);
                     }}
                   />
                 </div>
@@ -239,8 +241,8 @@ const VideoModal = () => {
               
               </CardContent>
               {showCommentBox ? (
-                <div style={{ display: "flex", flexDirection: "column",background:"green" }}>
-                  <div style={{ display: "flex", flexDirection: "column",background:"green" }}>{`Total Comments: ${videoComments?.result?.length}`}</div>
+                <div style={{ display: "flex", flexDirection: "column"}}>
+                  <div style={{ display: "flex", flexDirection: "column"}}>{`Total Comments: ${videoComments?.result?.length}`}</div>
                   <div >
                     <TextField
                       fullWidth
