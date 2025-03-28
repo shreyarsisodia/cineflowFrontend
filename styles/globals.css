@@ -363,7 +363,7 @@ a {
 }
 
 .playBtn,
-.moreInfoBtn {
+.moreInfoBtn,.comment-button {
   padding: 12px 30px;
   font-size: 1rem;
   font-weight: bold;
@@ -377,6 +377,9 @@ a {
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1); /* Soft glow */
   transition: all 0.3s ease-in-out;
 }
+.comment-button{
+  margin: 10px;
+}
 
 .moreInfoBtn:hover {
   background-color: rgba(255, 239, 239, 0.25); /* Slightly more visible on hover */
@@ -389,14 +392,14 @@ a {
 }
 
 .card {
-  width: 230px;
+  width: 300px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   /* background-color: white; */
   margin: 20px;
   transition: transform 0.3s ease-in-out;
-  height: 300px;
+  height: 280px;
 }
 
 .card:hover {
@@ -506,6 +509,7 @@ a {
 }
 
 .modal-overlay {
+  overflow-y: scroll;
   position: fixed;
   top: 0;
   left: 0;
@@ -520,13 +524,16 @@ a {
 
 /* Modal content styles */
 .modal {
+  margin-top:100px;
   /* background: white; */
   /* padding: 20px; */
   border-radius: 8px;
   width: 90%;
   max-width: 500px; /* Maximum width */
   /* height: 80%;  Adjust the height of the modal */
+  height: max-content;
   position: relative;
+ 
 }
 
 /* Container for the video player */
@@ -720,20 +727,25 @@ a {
   color: #ffffff;
 }
 .comment-section {
-  background: #120c1f no-repeat;
+  background: #262429 ;
+  height:100%;
+  width:100%;
   /* linear-gradient(149deg, #3b3b3b 6.96%, #36454F 40.17%, #36454F 73.39%); */
 }
 .comment-title {
   color: #ffffff;
   font-family: "Netflix Sans";
-  padding: 3px;
+  padding: 10px 10px 0px;
+  font-size:12px;
 }
 
 .textfield input {
   color: #ffffff !important;
+  font-size:14px ;
 }
 .submit-parent {
   display: flex;
+  width:100%;
   flex-direction: row;
   justify-content: end;
   align-items: end;
@@ -743,7 +755,6 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
   gap: 15px;
   padding: 15px;
 }
@@ -752,19 +763,19 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 5px;
 }
 
 .comment-parent {
-  height: 200px;
+  height: 100%;
+  width:100%;
   overflow: auto;
 }
 .comment-merge {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  width:100%;
 }
 /* Left Wing with Gradient */
 

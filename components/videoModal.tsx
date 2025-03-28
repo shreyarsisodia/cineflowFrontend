@@ -128,7 +128,7 @@ const VideoModal = () => {
                   objectFit: "cover",
                   backgroundPosition: "top" // Ensure cropping happens from the bottom
                 }}
-                image={"https://i.pinimg.com/736x/78/7f/94/787f948d9ab39ad51d88074ac7f82685.jpg"}
+                image={clickedCard?.poster}
                 title="movie"
                 // className="show-image"
               />
@@ -233,50 +233,45 @@ const VideoModal = () => {
                   <div style={{ color: "white", marginLeft: "-3px" }}>
                     {clickedCard?.type || "Movie"}
                   </div>
+                 
                 </div>
               </div>
+              
               </CardContent>
               {showCommentBox ? (
-                <div className="comment-section">
-                  <div className="comment-title">{`Total Comments: ${videoComments?.result?.length}`}</div>
-                  <div className="comment-merge">
+                <div style={{ display: "flex", flexDirection: "column",background:"green" }}>
+                  <div style={{ display: "flex", flexDirection: "column",background:"green" }}>{`Total Comments: ${videoComments?.result?.length}`}</div>
+                  <div >
                     <TextField
                       fullWidth
                       placeholder="Add Comment.."
-                      sx={{
-                        "& .MuiOutlinedInput-root": {
-                          "&.Mui-focused fieldset": {
-                            borderColor: "red",
-                            // color:"white"
-                          },
-                        },
-                      }}
-                      className="textfield"
+                     
+                    
                       onChange={(event) => {
                         setInputComment(event?.target.value);
                       }}
                     />
-                    <div className="submit-parent">
-                      <button className="moreInfoBtn" onClick={handleComment}>
+                    <div>
+                      <button className="playBtn" onClick={handleComment}>
                         {" "}
                         Submit
                       </button>
                     </div>
                     {videoComments && videoComments.result && videoComments.result.length > 0 && (
-                    <div className="comment-parent">
+                    <div >
                       {videoComments?.result &&
                         videoComments?.result?.map(
                           (ele, index: number) => (
-                            <div className="comment-profile" key={index}>
+                            <div key={index}>
                               <Avatar
                                 alt={ele?.user.name}
                                 src={ele?.user?.avatar}
                                 sx={{ width: 56, height: 56 }}
                               />
-                              <div className="profile-details">
+                              <div >
                                 {" "}
                                 <Typography
-                                  variant="h5"
+                                  variant="h6"
                                   sx={{ color: "white" }}
                                 >
                                   {ele?.user.name}
@@ -301,6 +296,66 @@ const VideoModal = () => {
         ) : (
           <ClipLoader />
         )}
+        {showCommentBox ? (
+                <div className="comment-section">
+                  <div className="comment-title">{`Total Comments: ${videoComments?.result?.length}`}</div>
+                  <div className="comment-merge">
+                    <TextField
+                      fullWidth
+                      placeholder="Add Comment.."
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          "&.Mui-focused fieldset": {
+                            borderColor: "#bbb",
+                            // color:"white"
+                          },
+                        },
+                      }}
+                      className="textfield"
+                      onChange={(event) => {
+                        setInputComment(event?.target.value);
+                      }}
+                    />
+                    <div className="submit-parent">
+                      <button className="comment-button" onClick={handleComment}>
+                        {" "}
+                        Submit
+                      </button>
+                    </div>
+                    {videoComments && videoComments.result && videoComments.result.length > 0 && (
+                    <div className="comment-parent">
+                      {videoComments?.result &&
+                        videoComments?.result?.map(
+                          (ele, index: number) => (
+                            <div className="comment-profile" key={index}>
+                              <Avatar
+                                alt={ele?.user.name}
+                                src={ele?.user?.avatar}
+                                sx={{ width: 56, height: 56 }}
+                              />
+                              <div className="profile-details">
+                                {" "}
+                                <Typography
+  variant="subtitle1"
+  sx={{ color: "white" }}
+>
+                                  {ele?.user.name}
+                                </Typography>
+                                <Typography  variant="body2" sx={{ color: "white" }}>
+                                  {ele?.comment}
+                                </Typography>
+                              </div>
+                            </div>
+                          )
+                        )}
+                    </div>
+                  )}
+                  </div>
+                 
+                </div>
+              ) : (
+                <></>
+              )}  
       </ReactModal>
     </div>
   );

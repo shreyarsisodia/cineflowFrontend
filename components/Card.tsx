@@ -40,8 +40,8 @@ const Card: React.FC<CardProps> = ({ imageUrl, title, videoUrl, ele }) => {
             src={imageUrl}
             alt={title}
             //   layout="fill"
-            width={230}
-            height={300}
+            width={380}
+            height={280}
             objectFit="cover"
             unoptimized
           />

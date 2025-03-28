@@ -57,7 +57,7 @@ export default function Dashboard() {
       type: "movie",
       genre: "Animation, Adventure, Fantasy",
       image: "https://images7.alphacoders.com/112/1120950.jpg",
-      videoUrl: "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/Frozen-Movie-Trailer.mp4",
+      videoUrl: "https://cineflow-videos.s3.eu-north-1.amazonaws.com/Disney's+Frozen+Official+Trailer.mp4",
       description: "A princess discovers her icy powers."
     },
     {
@@ -75,7 +75,7 @@ export default function Dashboard() {
       type: "movie",
       genre: "Animation, Romance, Fantasy",
       image: "https://images6.alphacoders.com/811/811443.jpg",
-      videoUrl: "https://cineflow-bucket.s3.eu-north-1.amazonaws.com/videos/Beauty-and-the-Beast-Trailer.mp4",
+      videoUrl: "https://cineflow-videos.s3.eu-north-1.amazonaws.com/BEAUTY+AND+THE+BEAST+%EF%BD%9C+NEW+Trailer+%EF%BD%9C+Official+Disney+UK.mp4",
       description: "A tale as old as time."
     }
   ];
